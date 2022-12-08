@@ -4,14 +4,14 @@
     var tela = document.querySelector('canvas');
     var pincel = tela.getContext('2d');
 
-    var mousePressionado = false;
-
     pincel.fillStyle = 'grey';
     pincel.fillRect(0, 0, 600, 400);
 
-    function desenhaCirculo(evento) {
-    
-        if (mousePressionado) {
+    var desenha = false;
+
+    tela.onmousemove = function(evento) {
+
+        if(desenha) {
             var x = evento.pageX - tela.offsetLeft;
             var y = evento.pageY - tela.offsetTop;
             pincel.fillStyle = 'blue';
@@ -20,21 +20,16 @@
             pincel.fill();
         }
         console.log(x + ',' + y);
-
     }
 
-    function verificaMouseDown(evento) {
-      mousePressionado = true;
+    tela.onmousedown = function() {
+
+        desenha = true;
     }
 
-    function verificaMouseUp(evento) {
-        mousePressionado = false;
+    tela.onmouseup = function() {
+
+        desenha = false;
     }
-
-    tela.onmousedown = verificaMouseDown;
-
-    tela.onmouseup = verificaMouseUp;
-
-    tela.onmousemove = desenhaCirculo;
 
 </script>
